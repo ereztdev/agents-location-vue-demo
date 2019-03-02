@@ -1,6 +1,7 @@
 <template>
   <div class="about">
     <h1 style="color: red">LOCATE</h1>
+    <Map></Map>
   </div>
 </template>
 
@@ -11,4 +12,15 @@
   }
 }
 </style>
-<script></script>
+<script>
+  import Map from '/src/components/Map'
+  // import ComponentC from './ComponentC'
+
+  export default {
+    components: {
+      Map,
+      // ComponentC
+    },
+    // ...
+  }
+</script>
