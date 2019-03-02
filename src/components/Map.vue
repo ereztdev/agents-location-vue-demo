@@ -1,7 +1,21 @@
 <template>
-  <!--<div id="map"></div>-->
-  <div>
-    <h2>this is a map</h2>
+  <div class="map--wrapper">
+    <GmapMap
+      ref="mapRef"
+      id="map"
+      :center="{ lat: 10, lng: 10 }"
+      :zoom="7"
+      map-type-id="terrain"
+    >
+      <GmapMarker
+        :key="index"
+        v-for="(m, index) in markers"
+        :position="m.position"
+        :clickable="true"
+        :draggable="true"
+        @click="center = m.position"
+      />
+    </GmapMap>
   </div>
 </template>
 
@@ -12,17 +26,34 @@
 export default {
   name: "Map",
   data() {
-    return {};
+    return {
+      markers: ["32.0853,34.7818"]
+    };
   },
   methods: {
-    mapInit() {
-      return console.log("asdwwwwww");
-    }
+    mapInit() {}
   },
   computed: {},
   created() {},
-  mounted() {}
+  mounted() {
+    this.mapInit();
+    this.$refs.mapRef.$mapPromise.then(map => {
+      map.panTo({ lat: 32.0853, lng: 34.7818 });
+    });
+  }
 };
 </script>
 
-<style scoped></style>
+<style scoped lang="scss">
+
+.map--wrapper {
+  position: relative;
+  width: 50%;
+  #map {
+    position: fixed;
+    width: 50vw;
+    height: 100vh;
+    z-index: -1
+  }
+}
+</style>

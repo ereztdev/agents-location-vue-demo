@@ -1,25 +1,20 @@
 <template>
-  <div class="about">
-    <h1 style="color: red">LOCATE</h1>
-    <!--<Map></Map>-->
+  <div class="locate">
+    <Map id="theMap"></Map>
+    <Agents></Agents>
   </div>
 </template>
 
-<style lang="scss">
-.about {
-  h1 {
-    color: darkred;
-  }
-}
-</style>
+<style lang="scss"></style>
 <script>
-// import Map from "/src/components/Map";
-// import ComponentC from './ComponentC'
+import Map from "@/components/Map.vue";
+import Agents from "@/components/Agents.vue";
 
 export default {
   name: "App",
   components: {
-    // Map
+    Map,
+    Agents
   }
 };
 </script>
