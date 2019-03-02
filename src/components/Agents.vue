@@ -3,16 +3,13 @@
     <ul>
       <li
         class="agent"
-        is="agent-item"
         v-for="(agent, index) in agents"
-        v-bind:key="agent.id"
-        v-bind:title="agent.title"
+        v-bind:key="agent.fake_loc"
+        v-bind:title="agent.fake_loc"
         v-on:remove="agents.splice(index, 1)"
-        v-on:click="
-          this.$refs.mapRef.$mapPromise.then(map => {
-            map.panTo({ lat: 1.38, lng: 103.8 });
-          })
-        "
+        v-on:click="changed()"
+        @mouseover="hover = true"
+        @mouseleave="hover = false"
       >
         {{agent.fake_loc}}
       </li>
@@ -21,30 +18,43 @@
 </template>
 
 <script>
-export default {
-  /* eslint-disable no-alert, no-console */
+  import LocationService from '@/services/LocationService'
 
-  name: "Agent",
+  export default {
+  /* eslint-disable no-alert, no-console */
+  name: "Agents",
+  components:{
+    // agent_item
+  },
   data() {
     return {
+      hoveredElement:'',
       agents: [
         { fake_loc: 123 },
         { fake_loc: 452 },
         { fake_loc: 452 },
         { fake_loc: 452 },
         { fake_loc: 152323 }
-      ]
+      ],
+      hover: false,
+
     };
   },
   methods: {
-    getAgents() {
+    async getAgents() {
+      const response = await LocationService.getWord({ word: this.hoveredElement })
+      this.agents = response.data.results[0]
       console.log("got agents");
+
+    },
+    changed: function(event) {
+      alert(event.target.value);
     }
   },
   computed: {},
   created() {},
   mounted() {
-    this.getAgents();
+    // this.getAgents();
   }
 };
 </script>

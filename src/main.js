@@ -6,12 +6,12 @@ import "./plugins/vuetify";
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";
-import dotenv from "dotenv";
-
-const config = dotenv.config();
-if (config.error) {
-  console.log("Could not load env file", config.error);
-}
+// import dotenv from "dotenv";
+//
+// const config = dotenv.config();
+// if (config.error) {
+//   console.log("Could not load env file", config.error);
+// }
 
 import * as VueGoogleMaps from "vue2-google-maps";
 // console.log(process.env);
@@ -41,6 +41,7 @@ Vue.use(VueGoogleMaps, {
   //// then disable the following:
   // installComponents: true,
 });
+Vue.component("Agents", require("./components/Agents.vue")); //component name should be in camel-case
 
 new Vue({
   router,
