@@ -4,57 +4,62 @@
       <li
         class="agent"
         v-for="(agent, index) in agents"
-        v-bind:key="agent.fake_loc"
-        v-bind:title="agent.fake_loc"
+        v-bind:key="index"
+        v-bind:title="agent.agent"
         v-on:remove="agents.splice(index, 1)"
-        v-on:click="changed()"
+        v-on:click="changed(agent.address)"
         @mouseover="hover = true"
         @mouseleave="hover = false"
       >
-        {{agent.fake_loc}}
+        {{ agent.agent }} - {{agent.address}}
       </li>
     </ul>
   </div>
 </template>
 
 <script>
-  import LocationService from '@/services/LocationService'
+import LocationService from "@/services/LocationService";
 
-  export default {
+export default {
   /* eslint-disable no-alert, no-console */
   name: "Agents",
-  components:{
+  components: {
     // agent_item
   },
   data() {
     return {
-      hoveredElement:'',
-      agents: [
-        { fake_loc: 123 },
-        { fake_loc: 452 },
-        { fake_loc: 452 },
-        { fake_loc: 452 },
-        { fake_loc: 152323 }
-      ],
+      hoveredElement: "",
+      agents: [],
       hover: false,
-
+      address: ''
     };
   },
   methods: {
     async getAgents() {
-      const response = await LocationService.getWord({ word: this.hoveredElement })
-      this.agents = response.data.results[0]
-      console.log("got agents");
-
+      const response = await LocationService.getLocation({
+        hoveredElement: this.hoveredElement
+      });
+      // this.agents = response.data.results[0];
+      // console.log("got agents", response.data/*.data.results[0]*/);
+      this.agents = response.data;
     },
     changed: function(event) {
-      alert(event.target.value);
+      // alert(event);
+      // this.$refs.mapRef.$mapPromise.then((map) => {
+      //   map.panTo(event)
+      // })
+      this.address = event;
+      this.$refs.mapRef.$mapPromise.then((map) => {
+        map.panTo(this.address)
+      })
+      alert(event);
     }
   },
   computed: {},
   created() {},
   mounted() {
-    // this.getAgents();
+    this.getAgents();
+
   }
 };
 </script>
@@ -77,7 +82,8 @@ ul {
     display: block;
     background: darkorange;
     width: 50vw;
-    font-size: 50px;
+    text-align: left;
+    font-size: 20px;
     transition: 0.65s ease-in-out;
     &:hover {
       cursor: pointer;

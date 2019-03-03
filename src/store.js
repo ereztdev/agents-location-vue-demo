@@ -5,7 +5,8 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    chosen_agent:{}
+    chosen_agent:{},
+    address: '',
   },
   mutations: {
     change(state, chosen_agent) {
