@@ -21,14 +21,11 @@
 
 <script>
 /* eslint-disable no-alert, no-console */
-// import ComponentA from './ComponentA'
-// import ComponentC from './ComponentC'
 export default {
   name: "Map",
   data() {
     return {
       markers: ["32.0853,34.7818"],
-      address: ""
     };
   },
   methods: {

@@ -7,7 +7,6 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    chosen_agent: {},
     address: "",
     latLng: ""
   },
@@ -15,10 +14,6 @@ export default new Vuex.Store({
     panTo(state, latLng) {
       state.latLng = latLng;
     },
-    change(state, chosen_agent) {
-      state.chosen_agent = chosen_agent;
-      state.address = chosen_agent.address;
-    }
   },
   actions: {
     newAddress(context, coords) {
@@ -26,7 +21,6 @@ export default new Vuex.Store({
     }
   },
   getters: {
-    chosen_agent: state => state.chosen_agent,
     latLng: state => state.latLng
   }
 });
