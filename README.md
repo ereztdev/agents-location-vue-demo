@@ -19,7 +19,7 @@ Please follow the following steps:
 
 1. Run ```yarn serve```
 2. Goto [```http://localhost:8080/locate```](http://localhost:8080/locate)
-3. You'll need [Tikal Agents - BE](https://bitbucket.org/yearzero/tikal-vue-demo/src/mapping/) in order to send requests & receive responses.
+3. You'll need [Tikal Agents - BE](https://bitbucket.org/yearzero/tikal-node-demo/src/master/) in order to send requests & receive responses.
 
  
 
