@@ -27,15 +27,30 @@ export default {
   name: "Map",
   data() {
     return {
-      markers: ["32.0853,34.7818"]
+      markers: ["32.0853,34.7818"],
+      address: ""
     };
   },
   methods: {
     mapInit() {}
   },
   computed: {},
+  watch: {},
   created() {},
   mounted() {
+    this.$store.watch(
+      (state, getters) => getters.latLng,
+      (newValue, oldValue) => {
+        console.log(`Updating from ${oldValue} to ${newValue}`);
+        this.$refs.mapRef.$mapPromise.then(map => {
+          map.panTo(
+            newValue
+              ? { lat: newValue.lat, lng: newValue.lng }
+              : { lat: 34.0853, lng: 32.7818 }
+          );
+        });
+      }
+    );
     this.mapInit();
     this.$refs.mapRef.$mapPromise.then(map => {
       map.panTo({ lat: 32.0853, lng: 34.7818 });
@@ -45,7 +60,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-
 .map--wrapper {
   position: relative;
   width: 50%;
@@ -53,7 +67,7 @@ export default {
     position: fixed;
     width: 50vw;
     height: 100vh;
-    z-index: -1
+    z-index: -1;
   }
 }
 </style>

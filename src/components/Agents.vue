@@ -7,11 +7,11 @@
         v-bind:key="index"
         v-bind:title="agent.agent"
         v-on:remove="agents.splice(index, 1)"
-        v-on:click="changed(agent.address)"
+        v-on:click="panTo(agent)"
         @mouseover="hover = true"
         @mouseleave="hover = false"
       >
-        {{ agent.agent }} - {{agent.address}}
+        {{ agent.agent }} - {{ agent.address }}
       </li>
     </ul>
   </div>
@@ -19,19 +19,19 @@
 
 <script>
 import LocationService from "@/services/LocationService";
-
+const axios = require("axios");
+const apiKey = "&key=" + process.env.VUE_APP_GOOGLE_API_KEY;
+const geoParserUrl =
+  "https://maps.googleapis.com/maps/api/geocode/json?address=";
 export default {
   /* eslint-disable no-alert, no-console */
   name: "Agents",
-  components: {
-    // agent_item
-  },
+  components: {},
   data() {
     return {
       hoveredElement: "",
       agents: [],
-      hover: false,
-      address: ''
+      hover: false
     };
   },
   methods: {
@@ -39,27 +39,25 @@ export default {
       const response = await LocationService.getLocation({
         hoveredElement: this.hoveredElement
       });
-      // this.agents = response.data.results[0];
-      // console.log("got agents", response.data/*.data.results[0]*/);
       this.agents = response.data;
     },
-    changed: function(event) {
-      // alert(event);
-      // this.$refs.mapRef.$mapPromise.then((map) => {
-      //   map.panTo(event)
-      // })
-      this.address = event;
-      this.$refs.mapRef.$mapPromise.then((map) => {
-        map.panTo(this.address)
-      })
-      alert(event);
-    }
+    panTo: function(agentObj){
+      let locationResponse = null;
+      axios
+        .get(geoParserUrl + agentObj.address + apiKey)
+        .then((response) => {
+          locationResponse = response.data.results[0]["geometry"].location;
+          this.$store.dispatch("newAddress", locationResponse);
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+    },
   },
   computed: {},
   created() {},
   mounted() {
     this.getAgents();
-
   }
 };
 </script>
