@@ -1,6 +1,7 @@
 #Tikal Agents - FE
-Hi, this is the front end demo.
+<img src="https://i.imgur.com/d3HEgrH.gif" width="100%">
 
+Hi, this is the front end demo.
 Please follow the following steps:
 ## Project setup
 
