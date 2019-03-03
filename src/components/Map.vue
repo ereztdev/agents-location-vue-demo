@@ -25,7 +25,7 @@ export default {
   name: "Map",
   data() {
     return {
-      markers: ["32.0853,34.7818"],
+      markers: ["32.0853,34.7818"]
     };
   },
   methods: {
@@ -37,8 +37,7 @@ export default {
   mounted() {
     this.$store.watch(
       (state, getters) => getters.latLng,
-      (newValue, oldValue) => {
-        console.log(`Updating from ${oldValue} to ${newValue}`);
+      newValue => {
         this.$refs.mapRef.$mapPromise.then(map => {
           map.panTo(
             newValue

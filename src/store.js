@@ -13,7 +13,7 @@ export default new Vuex.Store({
   mutations: {
     panTo(state, latLng) {
       state.latLng = latLng;
-    },
+    }
   },
   actions: {
     newAddress(context, coords) {

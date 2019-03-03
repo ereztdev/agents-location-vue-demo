@@ -19,6 +19,8 @@
 
 <script>
 import LocationService from "@/services/LocationService";
+
+//todo: create seperate async file
 const axios = require("axios");
 const apiKey = "&key=" + process.env.VUE_APP_GOOGLE_API_KEY;
 const geoParserUrl =
