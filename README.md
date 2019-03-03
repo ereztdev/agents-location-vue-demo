@@ -1,5 +1,5 @@
 #Tikal Agents - FE
-<img src="https://i.imgur.com/d3HEgrH.gif" width="100%">
+![picture](https://i.imgur.com/d3HEgrH.gif)
 
 Hi, this is the front end demo.
 Please follow the following steps:
