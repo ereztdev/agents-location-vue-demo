@@ -1,5 +1,5 @@
 <template>
-  <div id="agentList--wrapper">
+  <div class="agentList--wrapper">
     <ul>
       <li
         class="agent"
@@ -11,7 +11,7 @@
         @mouseover="hover = true"
         @mouseleave="hover = false"
       >
-        {{ agent.agent }} - {{ agent.address }}
+        Agent: {{ agent.agent }} | Address: {{ agent.address }}
       </li>
     </ul>
   </div>
@@ -65,11 +65,11 @@ export default {
 </script>
 
 <style scoped lang="scss">
-#agentList--wrapper {
+.agentList--wrapper {
   position: fixed;
   right: 0;
-  height: 100vh;
   width: calc(50vw - 17px);
+  height: calc(100vh - 33px);
   background: darkred;
   z-index: 0;
 }

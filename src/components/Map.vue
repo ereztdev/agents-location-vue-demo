@@ -62,7 +62,7 @@ export default {
   #map {
     position: fixed;
     width: 50vw;
-    height: 100vh;
+    height: calc(100vh - 125px);
     z-index: -1;
   }
 }
