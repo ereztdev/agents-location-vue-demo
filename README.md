@@ -14,8 +14,8 @@ Please follow the following steps:
  please send me your IP.
 
 
-###Run this project
->Please note that I am using port 8080 for front end.
+### Run this project
+> This will run on port 8080
 
 1. Run ```yarn serve```
 2. Goto [```http://localhost:8080/locate```](http://localhost:8080/locate)
